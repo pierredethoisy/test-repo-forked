@@ -1,7 +1,4 @@
 pipeline{
-triggers {
-  pollSCM 'H/2 * * * *'
-}
     agent {
         kubernetes{
             defaultContainer 'agent'
