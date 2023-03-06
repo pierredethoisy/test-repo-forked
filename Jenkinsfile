@@ -26,8 +26,6 @@ spec:
       stage('scan'){
           steps{
               sh 'env | sort'
-              sh 'git config --global --add safe.directory "*"'
-              sh 'git config --global --add safe.repository "https://github-dev.travp.net/gts/delegationkeytest.git"'
               sh 'ggshield secret scan ci'
           }
       }
