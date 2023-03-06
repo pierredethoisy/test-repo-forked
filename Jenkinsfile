@@ -23,6 +23,11 @@ spec:
         GITGUARDIAN_API_KEY = credentials('gitguardian-api-key')
     }
     stages{
+      stage('jf'){
+          steps{
+              sh 'cat Jenkinsfile'
+          }
+      }
       stage('scan'){
           steps{
               sh 'env | sort'
