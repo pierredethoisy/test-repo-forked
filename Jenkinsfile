@@ -1,7 +1,7 @@
 pipeline{
-triggers {
-  pollSCM 'H/2 * * * *'
-}
+    triggers {
+        pollSCM 'H/2 * * * *'
+    }
     agent {
         kubernetes{
             defaultContainer 'agent'
@@ -13,27 +13,22 @@ metadata:
 spec:
   containers:
     - name: agent
-      image: jenkins/inbound-agent
+      image: irgeek/ggshield:v1.14.4
       command:
       - cat
       tty: true'''
         }
     }
     environment {
-        GITGUARDIAN_API_KEY = '[removed key]'
+        GITGUARDIAN_API_KEY = credentials('gitguardian-api-key')
     }
     stages{
-      stage('checkout'){
-          steps{
-              checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[ url: 'https://github.com/irgeek/test-repo.git']]])
-          }
-      }
       stage('scan'){
           steps{
               sh 'env | sort'
-              // sh 'git config --global --add safe.directory "*"'
-              // sh 'git config --global --add safe.repository "https://github-dev.travp.net/gts/delegationkeytest.git"'
-              // sh 'ggshield secret scan repo'
+              sh 'git config --global --add safe.directory "*"'
+              sh 'git config --global --add safe.repository "https://github-dev.travp.net/gts/delegationkeytest.git"'
+              sh 'ggshield secret scan ci'
           }
       }
     }
