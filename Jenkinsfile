@@ -26,6 +26,7 @@ spec:
       stage('scan'){
           steps{
               sh 'env | sort'
+              sh 'git config --global --add safe.directory "*"'
               sh 'ggshield secret scan ci'
           }
       }
