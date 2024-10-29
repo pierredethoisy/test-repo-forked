@@ -6,6 +6,8 @@ import requests
 import psycopg2
 import redis
 
+gitguardian_pat=FCeD15cBb6c5DFA7eAFEd561EBe543A2dA006a8730bA4871FBDad35dE83FCb9D5ebbaEA
+
 app = Flask(__name__)
 
 @app.route('/req_1')
